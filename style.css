@@ -1,0 +1,295 @@
+:root {
+  --bg-main: #f7f6fb;
+  --white: #ffffff;
+  --lavender: #7c6ce4;
+  --lavender-soft: #edeaff;
+  --lavender-light: #a78bfa;
+  --green: #16a34a;
+  --red: #dc2626;
+  --text-main: #1f2937;
+  --text-muted: #6b7280;
+  --border-soft: #e5e7eb;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: var(--white);
+}
+
+/* ---------------- SPLIT BACKGROUND ---------------- */
+.bg-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 45%; /* top half */
+  background: linear-gradient(135deg, var(--lavender), var(--lavender-light));
+  z-index: -1;
+}
+
+.bg-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 55%; /* bottom half */
+  background: var(--white);
+  z-index: -1;
+}
+
+/* ---------------- MAIN APP ---------------- */
+.app {
+  width: 100%;
+  max-width: 420px;
+  padding: 24px;
+  position: relative;
+}
+
+/* ---------- HEADER ---------- */
+h1 {
+  color: white;
+  font-size: 2rem;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+/* ---------- SEARCH ---------- */
+.search-box {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.search-box input {
+  flex: 1;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  font-size: 0.95rem;
+}
+
+.search-box button {
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: none;
+  background: white;
+  color: var(--lavender);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ==================================================
+   FLOATING INSIGHT CARD
+================================================== */
+.stock-insight {
+  position: relative;
+  background: var(--white);
+  border-radius: 20px;
+  padding: 22px;
+  margin-top: 40px;
+  margin-bottom: 26px;
+  box-shadow: 0 20px 40px rgba(124, 108, 228, 0.25);
+  animation: floatUp 0.6s ease;
+}
+
+/* Left accent stripe */
+.stock-insight::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 15%;
+  width: 5px;
+  height: 70%;
+  background: linear-gradient(var(--lavender), var(--lavender-light));
+  border-radius: 10px;
+}
+
+/* Top symbol chip */
+.symbol-chip {
+  display: inline-block;
+  padding: 6px 12px;
+  background: var(--lavender-soft);
+  color: var(--lavender);
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.75rem;
+  margin-bottom: 10px;
+}
+
+.price {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 6px 0;
+}
+
+.change.up { color: var(--green); }
+.change.down { color: var(--red); }
+
+.sentiment {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #7b5cff;   /* Lavender */
+}
+
+.bullish {
+  background: #dcfce7;
+  color: var(--green);
+}
+
+.bearish {
+  background: #fee2e2;
+  color: var(--red);
+}
+
+.neutral {
+  background: #e5e7eb;
+  color: #475569;
+}
+
+/* Mini divider */
+.divider {
+  margin: 14px 0;
+  height: 1px;
+  background: var(--border-soft);
+}
+
+
+/* ---------- WATCHLIST ---------- */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.watch-item {
+  background: var(--white);
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+}
+
+/* ==================================================
+   BOTTOM ACTION DOCK
+================================================== */
+.action-dock {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--white);
+  display: flex;
+  justify-content: space-around;
+  padding: 12px 0;
+  box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
+}
+
+.action-btn {
+  background: none;
+  border: none;
+  color: var(--lavender);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ================= ANIMATION ================= */
+@keyframes floatUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* --------- CROSS / REMOVE BUTTON --------- */
+.watch-item button {
+  background: var(--lavender);   /* Lavender button */
+  color: var(--white);            /* White cross icon */
+  border: none;                   /* No default border */
+  border-radius: 50%;             /* Circular button */
+  width: 28px;                     /* Circle size */
+  height: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+/* Hover effect */
+.watch-item button:hover {
+  transform: scale(1.1);
+  background: var(--lavender-light); /* Slightly lighter on hover */
+  box-shadow: 0 6px 15px rgba(124,108,228,0.3); /* Floating effect */
+}
+/* --------- ADD TO WATCHLIST BUTTON --------- */
+.add-watchlist-btn {
+  background: var(--lavender);   /* Main button color */
+  color: var(--white);            /* Text color */
+  border: none;
+  border-radius: 12px;            /* Rounded corners */
+  padding: 10px 16px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;                        /* Space between icon & text */
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+/* Hover effect */
+.add-watchlist-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(124, 108, 228, 0.3);
+  background: var(--lavender-light);  /* Slightly lighter lavender on hover */
+}
+
+/* Optional: small star icon inside button */
+.add-watchlist-btn span {
+  font-size: 1rem;
+}
+/* AI Insight Text Styling */
+.ai-text {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.ai-text.bullish {
+  color: #22c55e;   /* green */
+}
+
+.ai-text.bearish {
+  color: #ef4444;   /* red */
+}
+
+.ai-text.neutral {
+  color: #a78bfa;   /* lavender */
+}
